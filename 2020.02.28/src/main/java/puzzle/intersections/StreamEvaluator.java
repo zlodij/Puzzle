@@ -1,9 +1,6 @@
 package puzzle.intersections;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class StreamEvaluator implements IntersectionEvaluator {
@@ -14,12 +11,19 @@ public class StreamEvaluator implements IntersectionEvaluator {
         Map<Integer, Integer> cache = new HashMap<>();
         // Look through all list to calculate a number of occurrences for every entry
         for (List<Integer> list : lists) {
+            Set<Integer> processed = new HashSet<>();
+
             list.forEach(integer -> {
                 int appearance = 1;
                 if (cache.containsKey(integer)) {
-                    appearance += cache.get(integer);
+                    // For duplicates do not increment counter of occurrences
+                    appearance = processed.contains(integer)
+                            ? cache.get(integer)
+                            : cache.get(integer) + appearance;
                 }
                 cache.put(integer, appearance);
+                // Mark current item as processed for current list
+                processed.add(integer);
             });
         }
 
