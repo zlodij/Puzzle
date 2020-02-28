@@ -7,7 +7,7 @@ import java.util.List;
 
 public class IntersectionTester {
     public static void main(String[] args) {
-        List<Integer> one = new ArrayList<>(Arrays.asList(5, 4, 3, 2, 7));
+        List<Integer> one = new ArrayList<>(Arrays.asList(5, 4, 3, 2, 7, 7));
         System.out.println("one: \t" + one.toString());
 
         List<Integer> two = new ArrayList<>(Arrays.asList(52, 43, 7, 25, 10, 13, 75, 62, 70, 1));
