@@ -11,7 +11,11 @@ public class ConcurrentSorter implements ListSorter {
     private List<Integer> list = new ArrayList<>();
 
     private synchronized void addValue(Integer value) {
-        list.add(value);
+        if(value < 0) {
+            list.add(0, value);
+        } else {
+            list.add(value);
+        }
     } // end addInteger
 
     private void clear() {
@@ -50,7 +54,7 @@ public class ConcurrentSorter implements ListSorter {
 
         @Override
         public Integer call() throws Exception {
-            TimeUnit.SECONDS.sleep(internal);
+            TimeUnit.SECONDS.sleep(Math.abs(internal));
 
             sorter.addValue(internal);
 
